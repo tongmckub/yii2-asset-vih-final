@@ -39,9 +39,14 @@ if (!Yii::$app->user->isGuest) {
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?= \yii\helpers\Url::to(['/division/index']) ?>"><span class="fa fa-edit"></span> เพิ่มแผนก</a>
+                    <li>
+                        <a href="<?= \yii\helpers\Url::to(['/party/index']) ?>"><span class="fa fa-edit"></span> เพิ่มฝ่าย</a>
                     </li>
-                    <li><a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
+                    <li>
+                        <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
+                    </li>
+                     <li>
+                        <a href="<?= \yii\helpers\Url::to(['/computervih/index']) ?>"><span class="glyphicon glyphicon-indent-left"></span> เพิ่มคอมพิวเตอร์</a>
                     </li>
                 </ul>
             </li>

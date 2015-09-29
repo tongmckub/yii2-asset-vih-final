@@ -30,20 +30,10 @@ else {
     $Photo = Yii::getAlias('@web') . '/data/emp_images/no-photo.png';
 }
 ?>
-<aside class="left-side sidebar-offcanvas">
 
-    <section class="sidebar">
-
-      
            <?= $this->render(
             '..\left.php',
             ['directoryAsset' => $directoryAsset]
         )
         ?>
-      
 
-        <!-- sidebar-menu. -- End -->
-
-    </section>
-
-</aside>

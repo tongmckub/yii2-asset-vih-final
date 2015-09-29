@@ -46,7 +46,7 @@ if (!Yii::$app->user->isGuest) {
                         <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
                     </li>
                      <li>
-                        <a href="<?= \yii\helpers\Url::to(['/computervih/index']) ?>"><span class="glyphicon glyphicon-indent-left"></span> เพิ่มคอมพิวเตอร์</a>
+                        <a href="<?= \yii\helpers\Url::to(['/computer-vih/index']) ?>"><span class="glyphicon glyphicon-indent-left"></span> เพิ่มคอมพิวเตอร์</a>
                     </li>
                 </ul>
             </li>

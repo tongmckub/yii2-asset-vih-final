@@ -25,10 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'computer_id',
+            //'computer_id',
             'asset_code',
-            'party.party_name',
-            'department.department_name',
+            [
+                'attribute' => 'party_id',
+                'format' => 'text',
+                'label' => 'ฝ่าย',
+                'value' => 'party.party_name',
+            ],
             'of_user',
             // 'serial_no',
             // 'computer_localtion',

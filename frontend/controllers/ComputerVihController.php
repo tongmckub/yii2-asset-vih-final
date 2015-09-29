@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use common\models\Party;
+use common\models\Department;
 /**
  * ComputerVihController implements the CRUD actions for ComputerVih model.
  */
@@ -116,6 +118,22 @@ class ComputerVihController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+     //ดึงแผนกจาก party_id
+    public function actionParty_state($id) {
+
+        $rows = Department::find()->where(['party_id' => $id])->all();
+
+        echo "<option value=''>--- เลือกฝ่าย ---</option>";
+
+        if (count($rows) > 0) {
+            foreach ($rows as $row) {
+                echo "<option value='$row->department_id'>$row->department_name</option>";
+            }
+        } else {
+            echo "";
         }
     }
 }

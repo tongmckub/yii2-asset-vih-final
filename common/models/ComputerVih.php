@@ -77,7 +77,7 @@ class ComputerVih extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCreatedBy()
+    public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }

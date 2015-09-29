@@ -19,27 +19,37 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Computer Vih'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'computer_id',
             'asset_code',
-            'party_id',
-            'department_id',
+            'party.party_name',
+            'department.department_name',
             'of_user',
             // 'serial_no',
             // 'computer_localtion',
             // 'computer_name',
             // 'ip',
             // 'mac_address',
-            // 'created_by',
-            // 'updated_by',
-
+            [
+                'attribute' => 'created_by',
+                'format' => 'text',
+                'label' => 'สร้างโดย',
+                'value' => 'user.username',
+            ],
+//            [
+//                'attribute' => 'updated_by',
+//                'format' => 'text',
+//                'label' => 'updated_by',
+//                'value' => 'user.username',
+//            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 
 </div>

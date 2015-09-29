@@ -32,26 +32,19 @@ if (!Yii::$app->user->isGuest) {
         
         <!-- You can delete next ul.sidebar-menu. It's just demo. -->
 
-        <ul class="sidebar-menu">
-            <li>
-                <a href="<?= Yii::$app->homeUrl ?>" class="navbar-link">
-                    <i class="fa fa-angle-down"></i> <span class="text-info">Menu </span>
+         <ul class="sidebar-menu">
+            <li class="treeview">
+                <a href="#">
+                    <i class="glyphicon glyphicon-folder-open"></i> <span>ตั่งค่า</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= \yii\helpers\Url::to(['/division/index']) ?>"><span class="fa fa-edit"></span> เพิ่มแผนก</a>
+                    </li>
+                    <li><a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
+                    </li>
+                </ul>
             </li>
-            
-            <?php 
-            if (!Yii::$app->user->isGuest) {
-                    $isSupport = Yii::$app->session->get('user_id');
-                    echo $isRole = Yii::$app->session->get('role_name');
-                    
-                   if ($this->context->module->id == 'software')
-	         echo $this->render('menu/dashboard');
-                    
-                    
-                }
-            
-            ?>
-
         </ul>
 
     </section>

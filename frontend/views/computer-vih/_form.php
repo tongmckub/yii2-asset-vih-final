@@ -30,7 +30,7 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'mac_address')->textInput(['maxlength' => true]) ?>
 
- 
+ <?php echo "12";?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

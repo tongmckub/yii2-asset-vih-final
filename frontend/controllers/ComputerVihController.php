@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\ComputerVih;
-use frontend\models\ComputerVihSearch;
+use common\models\Computervih;
+use frontend\models\ComputervihSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComputerVihController implements the CRUD actions for ComputerVih model.
+ * ComputervihController implements the CRUD actions for Computervih model.
  */
-class ComputerVihController extends Controller
+class ComputervihController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Lists all ComputerVih models.
+     * Lists all Computervih models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ComputerVihSearch();
+        $searchModel = new ComputervihSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Displays a single ComputerVih model.
+     * Displays a single Computervih model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Creates a new ComputerVih model.
+     * Creates a new Computervih model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ComputerVih();
+        $model = new Computervih();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->computer_id]);
@@ -72,7 +72,7 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Updates an existing ComputerVih model.
+     * Updates an existing Computervih model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Deletes an existing ComputerVih model.
+     * Deletes an existing Computervih model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ComputerVihController extends Controller
     }
 
     /**
-     * Finds the ComputerVih model based on its primary key value.
+     * Finds the Computervih model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ComputerVih the loaded model
+     * @return Computervih the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ComputerVih::findOne($id)) !== null) {
+        if (($model = Computervih::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

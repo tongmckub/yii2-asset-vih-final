@@ -3,12 +3,7 @@
 namespace common\models;
 
 use Yii;
-use common\models\User;
-//use yii\web\User;
-//add date auto
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "{{%software}}".
  *
@@ -26,12 +21,6 @@ use yii\helpers\ArrayHelper;
  */
 class Software extends \yii\db\ActiveRecord
 {
-    public function behaviors() {
-        return[
-            BlameableBehavior::className(),
-            TimestampBehavior::className()
-        ];
-    }
     /**
      * @inheritdoc
      */
@@ -46,7 +35,7 @@ class Software extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['software_name'], 'required'],
+            [['software_name', 'software_detail', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'required'],
             [['software_detail'], 'string'],
             [['created_by', 'created_at', 'updated_at', 'updated_by'], 'integer'],
             [['software_name'], 'string', 'max' => 100]

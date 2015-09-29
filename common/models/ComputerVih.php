@@ -3,15 +3,14 @@
 namespace common\models;
 
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%computer_vih}}".
  *
  * @property integer $computer_id
  * @property string $asset_code
- * @property integer $division_id
+ * @property integer $party_id
+ * @property integer $department_id
  * @property string $of_user
  * @property string $serial_no
  * @property string $computer_localtion
@@ -19,19 +18,16 @@ use yii\behaviors\TimestampBehavior;
  * @property string $ip
  * @property string $mac_address
  * @property integer $created_by
+ * @property integer $updated_by
  *
- * @property Division $division
  * @property User $createdBy
+ * @property Department $department
+ * @property Party $party
+ * @property User $updatedBy
  * @property SummaryOnSite[] $summaryOnSites
  */
 class ComputerVih extends \yii\db\ActiveRecord
 {
-    public function behaviors(){
-      return [
-        BlameableBehavior::className(),
-       // TimestampBehavior::className()
-      ];
-    }
     /**
      * @inheritdoc
      */
@@ -46,8 +42,8 @@ class ComputerVih extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_code', 'division_id'], 'required'],
-            [['division_id', 'created_by','updated_by'], 'integer'],
+            [['asset_code', 'party_id', 'department_id', 'of_user', 'serial_no', 'computer_localtion', 'computer_name', 'ip', 'mac_address', 'created_by', 'updated_by'], 'required'],
+            [['party_id', 'department_id', 'created_by', 'updated_by'], 'integer'],
             [['asset_code', 'mac_address'], 'string', 'max' => 17],
             [['of_user'], 'string', 'max' => 20],
             [['serial_no'], 'string', 'max' => 24],
@@ -63,25 +59,19 @@ class ComputerVih extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'computer_id' => 'รหัสคอมพิวเตอร์',
-            'asset_code' => 'รหัสทรพย์สิน',
-            'division_id' => 'ฝ่าย',
-            'of_user' => 'ผู้ใช้เครื่อง',
-            'serial_no' => 'ซีเรียลนัมเบอร์',
-            'computer_localtion' => 'ที่ตั้งของเครื่อง',
-            'computer_name' => 'Computer Name',
-            'ip' => 'Ip',
-            'mac_address' => 'Mac Address',
-            'created_by' => 'สร้างโดย',
+            'computer_id' => Yii::t('app', 'รหัสคอมพิวเตอร์'),
+            'asset_code' => Yii::t('app', 'รหัสทรพย์สิน'),
+            'party_id' => Yii::t('app', 'ฝ่าย'),
+            'department_id' => Yii::t('app', 'แผนก'),
+            'of_user' => Yii::t('app', 'ผู้ใช้เครื่อง'),
+            'serial_no' => Yii::t('app', 'ซีเรียลนัมเบอร์'),
+            'computer_localtion' => Yii::t('app', 'ที่ตั้งของเครื่อง'),
+            'computer_name' => Yii::t('app', 'Computer Name'),
+            'ip' => Yii::t('app', 'Ip'),
+            'mac_address' => Yii::t('app', 'Mac Address'),
+            'created_by' => Yii::t('app', 'สร้างโดย'),
+            'updated_by' => Yii::t('app', 'แก้ไขโดย'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDivision()
-    {
-        return $this->hasOne(Division::className(), ['division_id' => 'division_id']);
     }
 
     /**
@@ -90,6 +80,30 @@ class ComputerVih extends \yii\db\ActiveRecord
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepartment()
+    {
+        return $this->hasOne(Department::className(), ['department_id' => 'department_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParty()
+    {
+        return $this->hasOne(Party::className(), ['party_id' => 'party_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**

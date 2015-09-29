@@ -91,10 +91,14 @@ class User extends ActiveRecord implements IdentityInterface {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    public function getComputerVihs() {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-        return $this->hasMany(ComputerVih::className(), ['created_by' => 'id']);
-    }
+   public function getComputerVihs()
+   {
+       return $this->hasMany(ComputerVih::className(), ['created_by' => 'id']);
+   }
+    public function getComputerVihs0()
+   {
+       return $this->hasMany(ComputerVih::className(), ['updated_by' => 'id']);
+   }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -106,9 +110,10 @@ class User extends ActiveRecord implements IdentityInterface {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSoftwares0() {
-        return $this->hasMany(Software::className(), ['updated_by' => 'id']);
-    }
+     public function getSoftwares0()
+   {
+       return $this->hasMany(Software::className(), ['updated_by' => 'id']);
+   }
 
     /**
      * @return \yii\db\ActiveQuery

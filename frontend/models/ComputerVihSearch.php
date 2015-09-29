@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\ComputerVih;
+use common\models\Computervih;
 
 /**
- * ComputerVihSearch represents the model behind the search form about `common\models\ComputerVih`.
+ * ComputervihSearch represents the model behind the search form about `common\models\Computervih`.
  */
-class ComputerVihSearch extends ComputerVih
+class ComputervihSearch extends Computervih
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class ComputerVihSearch extends ComputerVih
     public function rules()
     {
         return [
-            [['computer_id', 'division_id', 'created_by'], 'integer'],
+            [['computer_id', 'party_id', 'department_id', 'created_by', 'updated_by'], 'integer'],
             [['asset_code', 'of_user', 'serial_no', 'computer_localtion', 'computer_name', 'ip', 'mac_address'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class ComputerVihSearch extends ComputerVih
      */
     public function search($params)
     {
-        $query = ComputerVih::find();
+        $query = Computervih::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,8 +57,10 @@ class ComputerVihSearch extends ComputerVih
 
         $query->andFilterWhere([
             'computer_id' => $this->computer_id,
-            'division_id' => $this->division_id,
+            'party_id' => $this->party_id,
+            'department_id' => $this->department_id,
             'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
         ]);
 
         $query->andFilterWhere(['like', 'asset_code', $this->asset_code])

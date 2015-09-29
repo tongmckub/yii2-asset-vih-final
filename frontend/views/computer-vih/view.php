@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Computervih */
+/* @var $model common\models\ComputerVih */
 
 $this->title = $model->computer_id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Computervihs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Computer Vihs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="computervih-view">
+<div class="computer-vih-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

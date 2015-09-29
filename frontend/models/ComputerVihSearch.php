@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Computervih;
+use common\models\ComputerVih;
 
 /**
- * ComputervihSearch represents the model behind the search form about `common\models\Computervih`.
+ * ComputerVihSearch represents the model behind the search form about `common\models\ComputerVih`.
  */
-class ComputervihSearch extends Computervih
+class ComputerVihSearch extends ComputerVih
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class ComputervihSearch extends Computervih
      */
     public function search($params)
     {
-        $query = Computervih::find();
+        $query = ComputerVih::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

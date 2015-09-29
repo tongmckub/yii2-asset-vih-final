@@ -42,7 +42,7 @@ class ComputerVih extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_code'], 'required'],
+            [['asset_code', 'party_id', 'department_id', 'of_user', 'serial_no', 'computer_localtion', 'computer_name', 'ip', 'mac_address', 'created_by', 'updated_by'], 'required'],
             [['party_id', 'department_id', 'created_by', 'updated_by'], 'integer'],
             [['asset_code', 'mac_address'], 'string', 'max' => 17],
             [['of_user'], 'string', 'max' => 20],

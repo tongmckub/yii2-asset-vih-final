@@ -10,6 +10,7 @@ use frontend\models\SummaryOnSiteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * SummaryOnSiteController implements the CRUD actions for SummaryOnSite model.
@@ -69,9 +70,14 @@ class SummaryOnSiteController extends Controller
       // $software_id = Yii::$app->getRequest()->get('s_id');
       // echo $software_id; exit();
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $att_computer = Json::decode($model->computer_id);
+            echo $model->software_id;
+            
+            print_r($att_computer); exit();
             return $this->redirect(['view', 'id' => $model->summary_id]);
         } else {
+            echo "12";
             return $this->render('create', [
                 'model' => $model,
                 'computer' => $computer,

@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\SummaryOnSite;
+use common\models\ComputerVih;
+use common\models\Software;
 use frontend\models\SummaryOnSiteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -58,16 +60,22 @@ class SummaryOnSiteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new SummaryOnSite();
+        $model    = new SummaryOnSite();
+        $computer = ComputerVih::find();
+        $software = new Software();
+        
+      // $software_id = Yii::$app->getRequest()->get('s_id');
+      // echo $software_id; exit();
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->summary_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                ''
+                'computer' => $computer,
+                'software' => $software,
             ]);
         }
     }

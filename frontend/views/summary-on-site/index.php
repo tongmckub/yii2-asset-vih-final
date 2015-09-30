@@ -73,7 +73,7 @@ echo $isRole = Yii::$app->session->get('role_name');
                                         <?= $comCount; ?>
                                     </span>
                                 </span>
-                                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['summary-on-site/create', 'id' => $sl->software_id], ['class' => 'btn btn-sm btn-info disp-count', 'title' => 'Add Computer to Group']) ?>
+                                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['summary-on-site/create', 's_id' => $sl->software_id], ['class' => 'btn btn-sm btn-info disp-count', 'title' => 'Add Computer to Group']) ?>
                             </div>
                         </li>
                     <?php endforeach; ?>

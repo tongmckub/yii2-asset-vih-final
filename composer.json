@@ -27,7 +27,7 @@
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
-		"maksyutin/yii2-dual-list-box": "dev-master"	
+        "maksyutin/yii2-dual-list-box": "dev-master"	
     },
     "config": {
         "process-timeout": 1800

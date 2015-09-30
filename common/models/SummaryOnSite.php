@@ -45,7 +45,7 @@ class SummaryOnSite extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['software_id', 'computer_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'required'],
+            [['software_id', 'computer_id'], 'required'],
             [['software_id', 'computer_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer']
         ];
     }

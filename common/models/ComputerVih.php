@@ -19,6 +19,7 @@ use Yii;
  * @property string $mac_address
  * @property integer $created_by
  * @property integer $updated_by
+ * @property integer $is_status
  *
  * @property User $createdBy
  * @property Department $department
@@ -42,8 +43,8 @@ class ComputerVih extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_code'], 'required'],
-            [['party_id', 'department_id', 'created_by', 'updated_by'], 'integer'],
+            [['asset_code', 'party_id', 'department_id', 'of_user', 'serial_no', 'computer_localtion', 'created_by', 'updated_by'], 'required'],
+            [['party_id', 'department_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['asset_code', 'mac_address'], 'string', 'max' => 17],
             [['of_user'], 'string', 'max' => 20],
             [['serial_no'], 'string', 'max' => 24],
@@ -71,13 +72,14 @@ class ComputerVih extends \yii\db\ActiveRecord
             'mac_address' => Yii::t('app', 'Mac Address'),
             'created_by' => Yii::t('app', 'สร้างโดย'),
             'updated_by' => Yii::t('app', 'แก้ไขโดย'),
+            'is_status' => Yii::t('app', 'สถานะเครื่อง'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUser1()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
@@ -101,7 +103,7 @@ class ComputerVih extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUpdatedBy()
+    public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }

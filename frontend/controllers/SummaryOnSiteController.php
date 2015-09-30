@@ -40,7 +40,7 @@ class SummaryOnSiteController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    
     /**
      * Displays a single SummaryOnSite model.
      * @param integer $id

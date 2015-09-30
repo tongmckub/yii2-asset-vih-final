@@ -9,6 +9,8 @@ use yii\helpers\Html;
 $this->title = 'Create Summary On Site';
 $this->params['breadcrumbs'][] = ['label' => 'Summary On Sites', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="summary-on-site-create">
 

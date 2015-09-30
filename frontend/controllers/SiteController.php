@@ -124,11 +124,11 @@ class SiteController extends Controller {
                     $nameRole = $rolefore->name;
                 }
                 if($nameRole == "SupportVIO")
-                    $numRole = 'vio';
+                    $numRole = 'VIO';
                 else if($nameRole == "SupportVIN")
-                    $numRole = 'vin';
+                    $numRole = 'VIN';
                 else if($nameRole == "SupportVIS")
-                    $numRole = 'vis';
+                    $numRole = 'VIS';
                 else 
                     $numRole = 'admin';
                 
@@ -140,7 +140,6 @@ class SiteController extends Controller {
                 \Yii::$app->session->setFlash('loginError', '<i class="fa fa-warning"></i><b> These Login credentials are Blocked/Deactive by Admin</b>');
                 return $this->render('login', ['model' => $model,]);
             }
-
             if ($model->login())
                 return $this->goBack();
             else

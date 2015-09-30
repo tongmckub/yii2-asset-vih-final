@@ -14,6 +14,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $updated_by
+ * @property integer $is_status
  *
  * @property User $createdBy
  * @property User $updatedBy
@@ -37,7 +38,7 @@ class Software extends \yii\db\ActiveRecord
         return [
             [['software_name', 'software_detail', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'required'],
             [['software_detail'], 'string'],
-            [['created_by', 'created_at', 'updated_at', 'updated_by'], 'integer'],
+            [['created_by', 'created_at', 'updated_at', 'updated_by', 'is_status'], 'integer'],
             [['software_name'], 'string', 'max' => 100]
         ];
     }
@@ -55,6 +56,7 @@ class Software extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'สร้างวันที่'),
             'updated_at' => Yii::t('app', 'วันที่แก้ไข'),
             'updated_by' => Yii::t('app', 'แก้ไขโดย'),
+            'is_status' => Yii::t('app', 'สถานะซอฟต์แวร์'),
         ];
     }
 

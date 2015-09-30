@@ -74,13 +74,13 @@ if (!Yii::$app->user->isGuest) {
         <div class="col-sm-5 col-xs-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-inr"></i> Fees </h3>
+                    <h3 class="box-title"><i class="fa fa-inr"></i> จำนวนเครื่องคอมพิวเตอร์ </h3>
                 </div>
                 <div class="box-body">
                     <div class="small-box bg-aqua">
                         <div class="inner">
                             <h3>&#8377; </h3>
-                            <p>Total Paid Fees</p>
+                            <p>VIO</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-inr" style="font-size:55px"></i>

@@ -77,16 +77,16 @@ class SiteController extends Controller {
         if (\Yii::$app->user->isGuest)
             return $this->redirect(['site/login']);
         else {
-            $isUser = Yii::$app->session->get('user_id');
-            $roleuser = \Yii::$app->authManager->getRolesByUser($isUser);
-            // $roleuser = Yii::$app->user->identity->role;
-            //$roleGet = \Yii::$app->authManager->getRole();
-            //$nameRole = $roleuser->ruleName;
-            //print_r($roleuser->name);//->getRole();
-            foreach ($roleuser as $rolefore) {
-                $namerole = $rolefore->name;
-            }
-
+//            $isUser = Yii::$app->session->get('user_id');
+//            $roleuser = \Yii::$app->authManager->getRolesByUser($isUser);
+//             $roleuser = Yii::$app->user->identity->role;
+//            $roleGet = \Yii::$app->authManager->getRole();
+//            $nameRole = $roleuser->ruleName;
+//            print_r($roleuser->name);//->getRole();
+//            foreach ($roleuser as $rolefore) {
+//                $namerole = $rolefore->name;
+//            }
+            $namerole = Yii::$app->session->get('role_name_dash');
             if ($namerole == 'SupportVIO') {
                 return $this->render('support-dashboard');
             } else if ($namerole == 'SupportVIN') {
@@ -121,13 +121,13 @@ class SiteController extends Controller {
             //หา Role จาก id
             $roleuser = \Yii::$app->authManager->getRolesByUser($loginuser);
                 foreach ($roleuser as $rolefore) {
-                    $namerole = $rolefore->name;
+                    $nameRole = $rolefore->name;
                 }
-                if($namerole == "SupportVIO")
+                if($nameRole == "SupportVIO")
                     $numRole = 'vio';
-                else if($namerole == "SupportVIN")
+                else if($nameRole == "SupportVIN")
                     $numRole = 'vin';
-                else if($namerole == "SupportVIS")
+                else if($nameRole == "SupportVIS")
                     $numRole = 'vis';
                 else 
                     $numRole = 'admin';
@@ -135,6 +135,7 @@ class SiteController extends Controller {
             if ($roleuser != null) {
                 \Yii::$app->session->set('user_id', $loginuser);
                 \Yii::$app->session->set('role_name',  $numRole);
+                \Yii::$app->session->set('role_name_dash', $nameRole);
             } else {
                 \Yii::$app->session->setFlash('loginError', '<i class="fa fa-warning"></i><b> These Login credentials are Blocked/Deactive by Admin</b>');
                 return $this->render('login', ['model' => $model,]);

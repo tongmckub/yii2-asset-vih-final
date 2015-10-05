@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "{{%software}}".
  *
@@ -22,6 +23,12 @@ use Yii;
  */
 class Software extends \yii\db\ActiveRecord
 {
+    public function behaviors(){
+      return [
+        BlameableBehavior::className(),
+        TimestampBehavior::className()
+      ];
+    }
     /**
      * @inheritdoc
      */

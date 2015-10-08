@@ -23,24 +23,23 @@ $get_software_id = Yii::$app->getRequest()->get('s_id');
                 </div>
                 <?php $form = ActiveForm::begin(); ?>
                 <div class="form-group">
-               
-                <?php
-                echo maksyutin\duallistbox\Widget::widget([
-                    'model' => $model,
-                    'attribute' => 'computer_id',
-                    'title' => 'Listbox',
-                    'data' => $computer,
-                    'data_id' => 'computer_id',    //สิ่งที่เก็บลงฐานข้อมุล
-                    'data_value' => 'computer_id', //สิ่งที่แสดง
-                    'lngOptions' => [
-                        'warning_info' => 'แจ้งเตือน..',
-                        'search_placeholder' => 'ค้นหาเครื่อง',
-                        'showing' => 'จำนวน',
-                        'available' => 'เครื่องทั้งหมด', //title ที่ยังไม่เลือก
-                        'selected' => 'เครื่องที่เลือก'    //title ที่เลือก
-                    ]
-                ]);
-                ?>
+                    <?php
+                    echo maksyutin\duallistbox\Widget::widget([
+                        'model' => $model,
+                        'attribute' => 'computer_id',
+                        'title' => 'Listbox',
+                        'data' => $computer,
+                        'data_id' => 'computer_id', //สิ่งที่เก็บลงฐานข้อมุล
+                        'data_value' => 'computer_id', //สิ่งที่แสดง
+                        'lngOptions' => [
+                            'warning_info' => 'แจ้งเตือน..',
+                            'search_placeholder' => 'ค้นหาเครื่อง',
+                            'showing' => 'จำนวน',
+                            'available' => 'เครื่องทั้งหมด', //title ที่ยังไม่เลือก
+                            'selected' => 'เครื่องที่เลือก'    //title ที่เลือก
+                        ]
+                    ]);
+                    ?>
                 </div>
                 <div class="center">
                     <?= Html::submitButton($model->isNewRecord ? 'บันทึก' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

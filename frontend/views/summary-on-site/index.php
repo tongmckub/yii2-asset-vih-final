@@ -11,7 +11,23 @@ $this->title = 'จัดการคอมพิวเตอร์';
 $this->params['breadcrumbs'][] = $this->title;
 echo $isRole = Yii::$app->session->get('role_name');
 ?>
-
+<?php
+if (Yii::$app->session->hasFlash('green-0') || Yii::$app->session->hasFlash('red-0')) :
+    ?>
+    <div class="col-xs-12">
+        <div class="alert alert-dismissible" style="background-color: #FFFFFF;border-color: #00c0ef;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            <?php
+            foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+                echo '<p class="text-' . preg_split('/[\s,-]+/', $key)[0] . '" style="padding-bottom:10px">' . $message . '</p>';
+            }
+            ?>
+        </div>
+    </div>
+    <?php
+endif;
+?>
 <div class="summary-on-site-index">
     <div class="box box-default">
         <div class="box-header with-border">
@@ -65,12 +81,13 @@ echo $isRole = Yii::$app->session->get('role_name');
                             <span class="text">
                                 <?php echo $sl->software_name; ?>
                             </span>
+                            <!--ปุ่ม count com-->
                             <?php $comCount = \common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id])->count(); ?>
                             <div class="pull-right box-tools">
                                 <span class="btn btn-sm btn-warning disp-count">
                                     <i class="fa fa-sitemap"></i> Computer &nbsp;
                                     <span class="badge">
-                                        <?= $comCount; ?>
+                                        <?= Html::a($comCount, ['software/view', 'id' => $sl->software_id]) ?> 
                                     </span>
                                 </span>
                                 <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['summary-on-site/create', 's_id' => $sl->software_id], ['class' => 'btn btn-sm btn-info disp-count', 'title' => 'Add Computer to Group']) ?>

@@ -63,33 +63,28 @@ class SummaryOnSiteController extends Controller {
         $computer = ComputerVih::find();
         $software = new Software();
         $get_software_id = Yii::$app->getRequest()->get('s_id');
-        $att_computer = Json::decode($model->computer_id);
 
-        if ($model->load(Yii::$app->request->post())) {
-//            $model->attributes = $_POST['SummaryOnSite'];
-//            print_r($model->software_id = $get_software_id);
-//            echo "on loop"."<br>";
-              $model->computer_id = $att_computer;
-//            $model->save(false);
-//            for ($i = 0; $i < count($att_computer); $i++):                
-//            $model->summary_id = null;
-//            $model->isNewRecord = true;
-              $model->software_id = $get_software_id;
-//            $model->computer_id = $_POST['SummaryOnSite']['computer_id'][$att_computer];
-//            $model->errors;
-              $model->save();
-            //exit(); 
-//            if ($model->save(false)) {
-//                echo "if save";
-//                Yii::$app->session->setFlash('green-', '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' . ' is created successfully');
-//            } else {
-//                echo "else save";
-//                Yii::$app->session->setFlash('red-', '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.');
-//            }
-            //endfor;
-            echo "<br>";
-            //exit();
-            return $this->redirect(['view', 'id' => $model->summary_id]);
+
+        if ($model->load(Yii::$app->request->post()) && isset($_POST['SummaryOnSite'])) {
+            $att_computer = Json::decode($model->computer_id);
+            //  print_r($att_computer);
+            //  print_r($_POST['SummaryOnSite']);
+            for ($i = 0; $i < count($att_computer); $i++) {
+                $model->summary_id = null;
+                $model->isNewRecord = true;
+                $model->software_id = $get_software_id;
+                $model->computer_id = $att_computer[$i];
+                if ($model->save()) {
+                    echo "if save";
+                    //  exit();
+                    Yii::$app->session->setFlash('green-' . $i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' .ComputerVih::findOne($att_computer[$i])->computer_name.' is created successfully');
+                } else {
+                    echo "else save";
+                    Yii::$app->session->setFlash('red-' . $i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.'.ComputerVih::findOne($att_computer[$i])->computer_name.' is created successfully');
+                }
+            }
+
+            return $this->redirect(['index', 'id' => $model->summary_id]);
         } else {
             //echo "12";
             return $this->render('create', [

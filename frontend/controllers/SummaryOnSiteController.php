@@ -68,12 +68,13 @@ class SummaryOnSiteController extends Controller {
                         ->where(['software_id' => $get_software_id])
                         ->asArray()->all();
         // $summary->attributes;
-        //VarDumper::dump($summary,10,true);
+        // VarDumper::dump($summary,10,true);
         foreach ($summary as $as_summary) {
              $sum_as = $as_summary['computer_id'] . ",";
-           // print($sum_as);
+        }
+        // print($sum_as);
         //$array = array_keys($summary);
-        //print_r(array_values($summary));
+        echo array_shift(array_values($summary));
         //echo $sum_as."<br>";
         
         //exit();
@@ -81,7 +82,7 @@ class SummaryOnSiteController extends Controller {
         //รายชื่อคอมที่ find()
         $computer_vih = ComputerVih::find()->where(['NOT IN', 'computer_id',[print($sum_as)]]);
         //  print_r($computer_vih);
-}
+
         if ($model->load(Yii::$app->request->post()) && isset($_POST['SummaryOnSite'])) {
             $att_computer = Json::decode($model->computer_id);
             //  print_r($att_computer);

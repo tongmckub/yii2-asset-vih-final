@@ -66,4 +66,32 @@ class SummaryOnSiteSearch extends SummaryOnSite
 
         return $dataProvider;
     }
+    
+    //Search for Computer_id 
+    public function get_sos($param)
+    {
+        $query = SummaryOnSite::find()->where(['software_id' => $_REQUEST['id']]);
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        
+        $this->load($param);
+        
+        if(!$this->validate()){
+            return $dataProvider;
+        }
+        $query->andFilterWhere([
+            'summary_id' => $this->summary_id,
+            'software_id' => $this->software_id,
+            'computer_id' => $this->computer_id,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
+
+        return $dataProvider;
+    }
+    
 }

@@ -42,7 +42,7 @@ endif;
                             <span class="edusec-link-box-text"><?= Html::a('จัดการซอฟต์แวร์', ['/software/index']); ?></span>
                             <span class="edusec-link-box-number"><?= \common\models\Software::find()->where(['is_status' => 0])->count(); ?></span>
                             <span class="edusec-link-box-desc"></span>
-                            <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> Create New', ['/course/section/create']); ?></span>
+                            <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> Create New', ['/software/create']); ?></span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div>
@@ -51,7 +51,7 @@ endif;
                         <span class="edusec-link-box-icon bg-yellow"><i class="fa fa-graduation-cap"></i></span>
                         <div class="edusec-link-box-content">
                             <span class="edusec-link-box-text"><?= Html::a('จัดการเครื่องคอมพิวเตอร์', ['/computer-vih/index']); ?></span>
-                            <span class="edusec-link-box-number"><?= common\models\ComputerVih::find()->where(['is_status' => 0, 'computer_localtion' => $isRole])->count(); ?></span>
+                            <span class="edusec-link-box-number"><?= \common\models\ComputerVih::find()->where(['is_status' => 0,'computer_localtion' => $isRole])->count(); ?></span>
                             <span class="edusec-link-box-desc"></span>
                             <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> Create New', ['/computer-vih/create']); ?></span>
                         </div><!-- /.info-box-content -->
@@ -116,8 +116,8 @@ endif;
             'computer_id',
             'created_by',
             //'updated_by',
-            // 'created_at',
-            // 'updated_at',
+            //'created_at',
+            //'updated_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

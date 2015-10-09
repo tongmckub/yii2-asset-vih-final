@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Software */
@@ -63,30 +64,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="box-body table-responsive">
                     <?php
-                    $fcd_data = new frontend\models\SummaryOnSiteSearch();
-                    $fcd_dataprovider = $fcd_data->get_fcd($_REQUEST['id']);
+                    $sos_data = new frontend\models\SummaryOnSiteSearch();
+                    $sos_dataprovider = $sos_data->get_sos($_REQUEST['id']);
                     ?>
                     <?=
                     GridView::widget([
-                        'dataProvider' => $fcd_dataprovider,
+                        'dataProvider' => $sos_dataprovider,
                         'summary' => '',
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            'fees_details_name',
-                            'fees_details_description',
-                            'fees_details_amount',
+                            'computer.asset_code',
+                            'computer.of_user',
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{update} {delete}',
                                 'buttons' => [
                                     'update' => function ($url, $model) {
-                                        $url = \Yii::$app->getUrlManager()->createUrl(["fees/fees-category-details/update", "fcd_id" => $model->fees_category_details_id, "fcc_id" => $model->fees_details_category_id]);
+                                        $url = \Yii::$app->getUrlManager()->createUrl(["computer-vih/update", "fcd_id" => $model->fees_category_details_id, "fcc_id" => $model->fees_details_category_id]);
                                         return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
                                                     'title' => Yii::t('yii', 'Update'),
                                         ]);
                                     },
                                             'delete' => function ($url, $model) {
-                                        $url = \Yii::$app->getUrlManager()->createUrl(["fees/fees-category-details/delete", "fcd_id" => $model->fees_category_details_id, "fcc_id" => $model->fees_details_category_id]);
+                                        $url = \Yii::$app->getUrlManager()->createUrl(["computer-vih/delete", "fcd_id" => $model->fees_category_details_id, "fcc_id" => $model->fees_details_category_id]);
                                         return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, [
                                                     'title' => Yii::t('yii', 'Delete'),
                                                     'data' => [

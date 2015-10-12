@@ -74,7 +74,7 @@ class SummaryOnSiteController extends Controller {
         }
         // print($sum_as);
         //$array = array_keys($summary);
-        echo array_shift(array_values($summary));
+        print_r(array_shift(array_values($summary)));
         //echo $sum_as."<br>";
         
         //exit();

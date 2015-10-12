@@ -9,7 +9,9 @@ namespace frontend\controllers\report;
 
 use yii\web\JsExpression;
 use yii\web\Controller;
-
+use Yii;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
 use common\models\ComputerVih;
 use common\models\Software;
 use common\models\SummaryOnSite;
@@ -26,6 +28,7 @@ class DefaultController extends Controller{
         $comStatusLocal[] = ['name'=>"Default ($comRegStat)", 'y'=>$comRegStat, 'color'=>'#77C730'];
         
         $softwareDataTmp = Software::find()->where(['is_status'=>0])->asArray()->limit(20)->orderBy('software_id DESC')->all();
+        $comStatusDataTmp = ComputerVih::find()->where(['is_status'=>0])->orderBy('computer_id')->asArray()->all();
         
         foreach($softwareDataTmp as $v){
             $comSoftwareReg = SummaryOnSite::find()->where(['is_status'=>0,'software_id'=>$v['software_id']])->count();
@@ -35,8 +38,32 @@ class DefaultController extends Controller{
         $comStatusData[] = ['name'=>"Default ($comRegStat)",
                 'type'=>'column',
                 'data'=>$dataRegTmp,
-                'color'=>'#77C730'
+                'color'=>'#77C730',
             ];
-            print_r($comStatusData); exit();
+        //print_r($comStatusData); exit();
+        
+//        foreach($comStatusDataTmp as $k=>$sv){
+//            $dataTmp = [];
+//            foreach($softwareDataTmp as $v){
+//                $comSoftwareStat = SummaryOnSite::find()->where(['is_status'=>0,'software_id'=>$v['software_id'],'computer_id'=>$sv['computer_id']])->count();
+//            
+//                $dataTmp[] = $comSoftwareStat;
+//            }
+//            $comStatusLocalCount = ComputerVih::find()->where(['is_status'=>0, 'computer_localtion'=>$sv['computer_localtion']])->count();
+//            $comStatusData[] = ['name'=>''."($comStatusLocalCount)",
+//                    'type'=>'column',
+//                    'data'=>$dataTmp,
+//                ];
+//            $comStatusLocal[] = ['name'=>$sv['computer_localtion'].' ('.$comStatusLocalCount.')',
+//                'y'=>$comStatusLocalCount,
+//                'color'=>new JsExpression('Highcharts.getOptions().colors['.($k).']')
+//                ];
+//        }
+        
+        return $this->render('index',[
+                        'softwareData' => $softwareData,
+                        'comStatusData' => $comStatusData,
+                        'comStatusLocal' => $comStatusLocal,
+        ]);
     }
 }

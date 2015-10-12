@@ -77,7 +77,7 @@ if (!Yii::$app->user->isGuest) {
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="<?= \yii\helpers\Url::to(['/report/default/index']) ?>"><span class="fa fa-edit"></span> รายงานข้อมูลการใช้ซอฟแวร์</a>
+                        <a href="<?= \yii\helpers\Url::to(['/report/default/index']) ?>"><span class="fa fa-edit"></span>รายงานข้อมูลการใช้ซอฟต์แวร์</a>
                     </li>
                     <li>
                         <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>

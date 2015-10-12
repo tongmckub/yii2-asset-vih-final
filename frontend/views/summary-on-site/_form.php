@@ -24,13 +24,14 @@ $get_software_id = Yii::$app->getRequest()->get('s_id');
                 <?php $form = ActiveForm::begin(); ?>
                 <div class="form-group">
                     <?php
+                    print_r($computerReg);
                     echo maksyutin\duallistbox\Widget::widget([
                         'model' => $model,
                         'attribute' => 'computer_id',
                         'title' => 'Listbox',
-                        'data' => $computer,
+                        'data' => $computerReg,
                         'data_id' => 'computer_id', //สิ่งที่เก็บลงฐานข้อมุล
-                        'data_value' => 'of_user', //สิ่งที่แสดง
+                        'data_value' => 'computer_id', //สิ่งที่แสดง
                         'lngOptions' => [
                             'warning_info' => 'แจ้งเตือน..',
                             'search_placeholder' => 'ค้นหาเครื่อง',

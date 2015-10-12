@@ -60,29 +60,25 @@ class SummaryOnSiteController extends Controller {
      * @return mixed
      */
     public function actionCreate() {
+        $dataTmp = $comTmp = [];
         $get_software_id = Yii::$app->getRequest()->get('s_id');
         $model = new SummaryOnSite();
         $software = new Software();
 
-        $summary = SummaryOnSite::find()->select('computer_id')
-                        ->where(['software_id' => $get_software_id])
-                        ->asArray()->all();
+        $summary = SummaryOnSite::find()->where(['software_id' => $get_software_id])->asArray()->all();
         // $summary->attributes;
         // VarDumper::dump($summary,10,true);
         foreach ($summary as $as_summary) {
-             $sum_as = $as_summary['computer_id'] . ",";
+            //รายชื่อคอมที่ find()
+            $computer_vihData = ComputerVih::find()->where(['computer_id' => $as_summary['computer_id']]);
+            $dataTmp[] = $computer_vihData;
+            $comTmp[] = $as_summary['computer_id'];
+            
+            $computer_vih = ComputerVih::find()->where(['NOT IN','computer_id', $comTmp]);
         }
-        // print($sum_as);
-        //$array = array_keys($summary);
-        print_r(array_shift(array_values($summary)));
-        //echo $sum_as."<br>";
-        
-        //exit();
-
-        //รายชื่อคอมที่ find()
-        $computer_vih = ComputerVih::find()->where(['NOT IN', 'computer_id',[print($sum_as)]]);
-        //  print_r($computer_vih);
-
+          //  print_r($comTmp);
+          //  exit();
+         
         if ($model->load(Yii::$app->request->post()) && isset($_POST['SummaryOnSite'])) {
             $att_computer = Json::decode($model->computer_id);
             //  print_r($att_computer);
@@ -107,6 +103,7 @@ class SummaryOnSiteController extends Controller {
             return $this->render('create', [
                         'model' => $model,
                         'computer' => $computer_vih,
+                        'computerReg' => $comTmp,
                         'software' => $software,
             ]);
         }

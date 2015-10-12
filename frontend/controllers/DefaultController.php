@@ -22,6 +22,14 @@ use common\models\SummaryOnSite;
 class DefaultController extends Controller{
     //put your code here
     public function actionIndex(){
+        $dataRegTmp = $softwareData = [];
+        $comRegStat = ComputerVih::find()->where(['is_status' => 0])->count();
+        $comStatusLocal[] = ['name'=>"Default ($comRegStat)", 'y'=>$comRegStat, 'color'=>'#77C730'];
         
+        $softwareDataTmp = Software::find()->where(['is_status'=>0])->asArray()->limit(20)->orderBy('software_id DESC')->all();
+        
+        foreach($softwareDataTmp as $v){
+            
+        }
     }
 }

@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $this->render('_form', [
         'model' => $model,
         'computer' => $computer,
+        'computerReg' => $computerReg,
         'software' => $software,
     ])
     ?>

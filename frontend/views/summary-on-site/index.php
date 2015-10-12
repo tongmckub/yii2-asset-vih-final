@@ -101,10 +101,6 @@ endif;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Summary On Site', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
@@ -112,7 +108,12 @@ endif;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'summary_id',
-            'software_id',
+             [
+                'attribute' => 'softwarw_id',
+                'format' => 'text',
+                'label' => 'ชื่อซอฟต์แวร์',
+                'value' => 'software.software_name',
+            ],
             'computer_id',
             'created_by',
             //'updated_by',

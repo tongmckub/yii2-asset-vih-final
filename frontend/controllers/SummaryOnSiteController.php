@@ -70,11 +70,11 @@ class SummaryOnSiteController extends Controller {
         // VarDumper::dump($summary,10,true);
         foreach ($summary as $as_summary) {
             //รายชื่อคอมที่ find()
-            $computer_vihData = ComputerVih::find()->where(['computer_id' => $as_summary['computer_id']]);
-            $dataTmp[] = $computer_vihData;
+            $computer_vihSum = ComputerVih::find()->where(['computer_id' => $as_summary['computer_id']]);
+            $dataTmp[] = $computer_vihSum;
             $comTmp[] = $as_summary['computer_id'];
             
-            $computer_vih = ComputerVih::find()->where(['NOT IN','computer_id', $comTmp]);
+            $computer_vih = ComputerVih::find()->where(['NOT IN','computer_id', $comTmp])->asArray()->limit(300)->orderBy('computer_id DESC');
         }
           //  print_r($comTmp);
           //  exit();
@@ -91,10 +91,10 @@ class SummaryOnSiteController extends Controller {
                 if ($model->save()) {
                     echo "if save";
                     //  exit();
-                    Yii::$app->session->setFlash('green-' . $i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' . ComputerVih::findOne($att_computer[$i])->computer_name . ' is created successfully');
+                    Yii::$app->session->setFlash('green-' . $i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');
                 } else {
                     echo "else save";
-                    Yii::$app->session->setFlash('red-' . $i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.' . ComputerVih::findOne($att_computer[$i])->computer_name . ' is created successfully');
+                    Yii::$app->session->setFlash('red-' . $i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');
                 }
             }
 

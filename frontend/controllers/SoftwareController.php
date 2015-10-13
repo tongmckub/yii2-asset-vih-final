@@ -34,10 +34,12 @@ class SoftwareController extends Controller
     {
         $searchModel = new SoftwareSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new Software();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'software'  => $model,
         ]);
     }
 

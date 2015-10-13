@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "*",
         "dmstr/yii2-adminlte-asset": "1.*",
         "philippfrenzel/yii2fullcalendar":"*",
-        "miloschuman/yii2-highcharts-widget": "dev-master"
+        "miloschuman/yii2-highcharts-widget": "dev-master",
+        "pheme/yii2-toggle-column": "*",
+        "yiisoft/yii2-imagine": "~2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

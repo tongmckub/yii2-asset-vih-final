@@ -1,12 +1,10 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace frontend\controllers\report;
-
 use yii\web\JsExpression;
 use yii\web\Controller;
 use Yii;
@@ -32,10 +30,10 @@ class DefaultController extends Controller{
         
         foreach($softwareDataTmp as $v){
             $comSoftwareReg = SummaryOnSite::find()->where(['is_status'=>0,'software_id'=>$v['software_id']])->count();
-            $dataRegTmp[] = $comSoftwareReg;
+            $dataRegTmp[] = (int)$comSoftwareReg;
             $softwareData[] = $v['software_name'];
         }
-        $comStatusData[] = ['name'=>"Default ($comRegStat)",
+        $comStatusData[] = ['name'=>"ทั้งหมด ($comRegStat)",
                 'type'=>'column',
                 'data'=>$dataRegTmp,
                 'color'=>'#77C730',

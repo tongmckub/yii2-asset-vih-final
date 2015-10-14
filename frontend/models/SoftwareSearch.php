@@ -41,10 +41,10 @@ class SoftwareSearch extends Software
      */
     public function search($params)
     {
-        $query = Software::find();
+        $query = Software::find()->where('is_status != 2');
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query, 'sort'=>['defaultOrder' => ['software_id' => SORT_DESC]],
         ]);
 
         $this->load($params);

@@ -3,8 +3,10 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Model;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+
 /**
  * This is the model class for table "{{%software}}".
  *
@@ -21,27 +23,30 @@ use yii\behaviors\TimestampBehavior;
  * @property User $updatedBy
  * @property SummaryOnSite[] $summaryOnSites
  */
-class Software extends \yii\db\ActiveRecord
-{
-    public function behaviors(){
-      return [
-        BlameableBehavior::className(),
-        TimestampBehavior::className()
-      ];
-    }
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%software}}';
+class Software extends \yii\db\ActiveRecord {
+
+    public function behaviors() {
+        return [
+            BlameableBehavior::className(),
+            TimestampBehavior::className()
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public static function tableName() {
+        return '{{%software}}';
+    }
+
+//    public static function find() {
+//        return parent::find()->andWhere(['<>', 'is_status', 2]);
+//    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules() {
         return [
             [['software_name', 'software_detail', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'required'],
             [['software_detail'], 'string'],
@@ -53,8 +58,7 @@ class Software extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'software_id' => Yii::t('app', 'เลขที่ซอฟต์แวร์'),
             'software_name' => Yii::t('app', 'ชื่อซอฟต์แวร์'),
@@ -63,31 +67,28 @@ class Software extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'สร้างวันที่'),
             'updated_at' => Yii::t('app', 'วันที่แก้ไข'),
             'updated_by' => Yii::t('app', 'แก้ไขโดย'),
-            'is_status' => Yii::t('app', 'สถานะซอฟต์แวร์'),
+            'is_status'  => Yii::t('app', 'สถานะซอฟต์แวร์'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCreatedBy()
-    {
+    public function getCreatedBy() {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUpdatedBy()
-    {
+    public function getUpdatedBy() {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSummaryOnSites()
-    {
+    public function getSummaryOnSites() {
         return $this->hasMany(SummaryOnSite::className(), ['software_id' => 'software_id']);
     }
 
@@ -95,8 +96,8 @@ class Software extends \yii\db\ActiveRecord
      * @inheritdoc
      * @return SoftwareQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new SoftwareQuery(get_called_class());
     }
+
 }

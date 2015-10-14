@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\SoftwareSearch */
@@ -14,23 +15,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?php
-    \yii\widgets\Pjax::begin(
-            [
-                'id' => 'course-id',
-                'enablePushState' => false,
-                'enableReplaceState' => false,
-            ]
-    );
-    ?>
     <p>
         <?= Html::a('Create Software', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <?php
+    Pjax::begin([
+        'id' => 'software_id',
+        'enablePushState' => false,
+        'enableReplaceState' => false,
+    ]);
+    ?>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary' => '',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'software_id',
@@ -46,9 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'enableAjax' => false,
                 'filter' => ['0' => 'Active', '1' => 'Inactive']
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn'
+            ],
         ],
     ]);
     ?>
-    <?php \yii\widgets\Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 </div>

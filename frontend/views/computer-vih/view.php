@@ -38,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'computer_name',
             'ip',
             'mac_address',
-            'user.username',
-            'user.username',
+            'createdBy.username',
+            'updatedBy.username',
         ],
     ]) ?>
 

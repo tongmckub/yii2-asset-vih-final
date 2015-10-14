@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //	];
                 echo Highcharts::widget([
                     'scripts' => [
-                        'modules/exporting',
-                        'themes/grid-light',
+                       // 'modules/exporting',
+                       // 'themes/grid-light',
                         'highcharts-3d',
                     ],
                     'options' => [

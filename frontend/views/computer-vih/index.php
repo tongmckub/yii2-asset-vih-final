@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\ComputerVihSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Computer Vihs');
+$this->title = Yii::t('app', 'จัดการคอมพิวเตอร์');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="computer-vih-index">
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'created_by',
                 'format' => 'text',
                 'label' => 'สร้างโดย',
-                'value' => 'user.username',
+                'value' => 'createdBy.username',
             ],
 //            [
 //                'attribute' => 'updated_by',

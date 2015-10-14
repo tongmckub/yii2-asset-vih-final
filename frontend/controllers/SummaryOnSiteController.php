@@ -76,9 +76,6 @@ class SummaryOnSiteController extends Controller {
             
             $computer_vih = ComputerVih::find()->where(['NOT IN','computer_id', $comTmp])->asArray()->limit(300)->orderBy('computer_id DESC');
         }
-          //  print_r($comTmp);
-          //  exit();
-         
         if ($model->load(Yii::$app->request->post()) && isset($_POST['SummaryOnSite'])) {
             $att_computer = Json::decode($model->computer_id);
             //  print_r($att_computer);
@@ -88,16 +85,13 @@ class SummaryOnSiteController extends Controller {
                 $model->isNewRecord = true;
                 $model->software_id = $get_software_id;
                 $model->computer_id = $att_computer[$i];
-                if ($model->save()) {
-                    echo "if save";
-                    //  exit();
+                if ($model->save(false)) {                 
+                   // exit();
                     Yii::$app->session->setFlash('green-' . $i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');
                 } else {
-                    echo "else save";
                     Yii::$app->session->setFlash('red-' . $i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');
                 }
             }
-
             return $this->redirect(['index', 'id' => $model->summary_id]);
         } else {
             return $this->render('create', [

@@ -48,7 +48,7 @@ class Software extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['software_name', 'software_detail', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'required'],
+            [['software_name', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'required'],
             [['software_detail'], 'string'],
             [['created_by', 'created_at', 'updated_at', 'updated_by', 'is_status'], 'integer'],
             [['software_name'], 'string', 'max' => 100]

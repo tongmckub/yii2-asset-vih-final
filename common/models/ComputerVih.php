@@ -13,7 +13,7 @@ use Yii;
  * @property integer $department_id
  * @property string $of_user
  * @property string $serial_no
- * @property string $computer_localtion
+ * @property integer $computer_localtion
  * @property string $computer_name
  * @property string $ip
  * @property string $mac_address
@@ -23,6 +23,7 @@ use Yii;
  *
  * @property User $createdBy
  * @property Department $department
+ * @property Location $computerLocaltion
  * @property Party $party
  * @property User $updatedBy
  * @property SummaryOnSite[] $summaryOnSites
@@ -44,11 +45,10 @@ class ComputerVih extends \yii\db\ActiveRecord
     {
         return [
             [['asset_code', 'party_id', 'department_id', 'of_user', 'serial_no', 'computer_localtion', 'created_by', 'updated_by'], 'required'],
-            [['party_id', 'department_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
+            [['party_id', 'department_id', 'computer_localtion', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['asset_code', 'mac_address'], 'string', 'max' => 17],
             [['of_user'], 'string', 'max' => 20],
             [['serial_no'], 'string', 'max' => 24],
-            [['computer_localtion'], 'string', 'max' => 3],
             [['computer_name'], 'string', 'max' => 40],
             [['ip'], 'string', 'max' => 13]
         ];
@@ -79,7 +79,7 @@ class ComputerVih extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser1()
+    public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
@@ -95,6 +95,14 @@ class ComputerVih extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getComputerLocaltion()
+    {
+        return $this->hasOne(Location::className(), ['localtion_id' => 'computer_localtion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getParty()
     {
         return $this->hasOne(Party::className(), ['party_id' => 'party_id']);
@@ -103,7 +111,7 @@ class ComputerVih extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUpdatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }

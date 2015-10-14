@@ -119,7 +119,7 @@ if (!Yii::$app->user->isGuest) {
                 <div class="box-body">
                     <ul class="todo-list" id="coursList">
                         <?php
-                        $SoftwareList = \common\models\Software::find()->all();
+                        $SoftwareList = \common\models\Software::find()->where(['is_status' => 0])->all();
                         foreach ($SoftwareList as $sl):
                             ?>
                             <li>
@@ -128,8 +128,8 @@ if (!Yii::$app->user->isGuest) {
                                     <i class="fa fa-ellipsis-v"></i>
                                 </span>
                                 <span class="text"><?php echo $sl->software_name; ?></span>
-                                <?php $comCount = common\models\ComputerVih::find()->where(['computer_id' => $sl->software_id])->count(); ?>
-                                <span class="notification-container pull-right text-teal" title="<?= $comCount; ?> Computers"><i class="fa fa-users"></i><span class="label label-info notification-counter"><?= $comCount; ?></span></span>
+                                <?php $comCount = common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id])->count(); ?>
+                                <span class="notification-container pull-right text-teal" title="<?= $comCount; ?> Computers"><i class="fa fa-users"></i><span class="label  notification-counter">  <?= Html::a($comCount, ['software/view', 'id' => $sl->software_id]) ?>  </span></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -210,4 +210,4 @@ EOF;
         </section><!-- /.Left col -->
     </div>
 
-    </section>
+</section>

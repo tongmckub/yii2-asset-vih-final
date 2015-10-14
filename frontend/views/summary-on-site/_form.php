@@ -17,7 +17,7 @@ $get_software_id = Yii::$app->getRequest()->get('s_id');
             <div class="box box-solid box-info col-xs-12 col-lg-12 no-padding">
                 <div class="box-header with-border">
                     <h4 class="box-title"><i class="fa fa-info-circle"></i><?php
-                        $softwareData = Software::find()->where('software_id=' . $get_software_id)->asArray()->one();
+                        $softwareData = Software::find()->where('software_id =' . $get_software_id)->asArray()->one();
                         echo "&nbsp" . $softwareData['software_name'];
                         ?></h4>
                 </div>

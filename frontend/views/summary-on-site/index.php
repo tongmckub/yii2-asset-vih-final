@@ -6,7 +6,6 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\SummaryOnSiteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'จัดการคอมพิวเตอร์';
 $this->params['breadcrumbs'][] = $this->title;
 echo $isRole = Yii::$app->session->get('role_name');
@@ -51,9 +50,20 @@ endif;
                         <span class="edusec-link-box-icon bg-yellow"><i class="fa fa-graduation-cap"></i></span>
                         <div class="edusec-link-box-content">
                             <span class="edusec-link-box-text"><?= Html::a('จัดการเครื่องคอมพิวเตอร์', ['/computer-vih/index']); ?></span>
-                            <span class="edusec-link-box-number"><?= \common\models\ComputerVih::find()->where(['is_status' => 0,'computer_localtion' => $isRole])->count(); ?></span>
+                            <span class="edusec-link-box-number"><?= \common\models\ComputerVih::find()->where(['is_status' => 0])->count(); ?></span>
                             <span class="edusec-link-box-desc"></span>
                             <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> Create New', ['/computer-vih/create']); ?></span>
+                        </div><!-- /.info-box-content -->
+                    </div><!-- /.info-box -->
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="edusec-link-box">
+                        <span class="edusec-link-box-icon bg-teal"><i class="fa fa-cog"></i></span>
+                        <div class="edusec-link-box-content">
+                            <span class="edusec-link-box-text"><?= Html::a('จำนวนคอมพิวเตอร์ที่ใช้ชอฟต์แวร์', ['/summary-on-site/index']); ?></span>
+                            <span class="edusec-link-box-number"><?= common\models\SummaryOnSite::find()->andWhere(['is_status' => 0])->count(); ?></span>
+                            <span class="edusec-link-box-desc"></span>
+                            <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> Create New', ['/summary-on-site/create']); ?></span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div>
@@ -108,7 +118,7 @@ endif;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'summary_id',
-             [
+            [
                 'attribute' => 'softwarw_id',
                 'format' => 'text',
                 'label' => 'ชื่อซอฟต์แวร์',

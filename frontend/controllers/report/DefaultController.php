@@ -44,16 +44,16 @@ class DefaultController extends Controller{
         foreach($comStatusDataTmp as $k=>$sv){
             $dataTmp = [];
             foreach($softwareDataTmp as $v){
-                $comSoftwareStat = SummaryOnSite::find()->where(['is_status'=>0,'software_id'=>$v['software_id'],'computer_id'=>$sv['computer_id']])->count();
+                $comSoftwareStat = SummaryOnSite::find()->where(['is_status'=>0,'software_id'=>$v['software_id']])->count();
             
                 $dataTmp[] = $comSoftwareStat;
             }
-            $comStatusLocalCount = ComputerVih::find()->where(['is_status'=>0, 'computer_localtion'=>$sv['location_id']])->count();
-            $comStatusData[] = ['name'=>''."($comStatusLocalCount)",
+            $comStatusLocalCount = ComputerVih::find()->where(['is_status'=>0, 'computer_localtion'=>$sv['localtion_id']])->count();
+            $comStatusData[] = ['name'=>$sv['localtion_name']."($comStatusLocalCount)",
                     'type'=>'column',
                     'data'=>$dataTmp,
                 ];
-            $comStatusLocal[] = ['name'=>$sv['computer_localtion'].' ('.$comStatusLocalCount.')',
+            $comStatusLocal[] = ['name'=>$sv['localtion_name'].' ('.$comStatusLocalCount.')',
                 'y'=>$comStatusLocalCount,
                 'color'=>new JsExpression('Highcharts.getOptions().colors['.($k).']')
                 ];

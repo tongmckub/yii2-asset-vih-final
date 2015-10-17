@@ -51,6 +51,9 @@ if (!Yii::$app->user->isGuest) {
                     <li>
                         <a href="<?= \yii\helpers\Url::to(['/computer-vih/index']) ?>"><span class="glyphicon glyphicon-indent-left"></span> เพิ่มคอมพิวเตอร์</a>
                     </li>
+                    <li>
+                        <a href="<?= \yii\helpers\Url::to(['/events/index']) ?>"><span class="glyphicon glyphicon-indent-left"></span> ปฏิทิน</a>
+                    </li>
                 </ul>
             </li>
         </ul>

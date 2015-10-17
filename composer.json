@@ -22,7 +22,9 @@
         "philippfrenzel/yii2fullcalendar":"*",
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "pheme/yii2-toggle-column": "*",
-        "yiisoft/yii2-imagine": "~2.0.0"
+        "yiisoft/yii2-imagine": "~2.0.0",
+        "kartik-v/yii2-widget-select2": "*",
+	"kartik-v/yii2-widgets": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

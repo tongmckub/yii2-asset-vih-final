@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\SoftwareSearch */
@@ -40,10 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_by',
             [
                 'class' => '\pheme\grid\ToggleColumn',
-                'contentOptions' => ['class' => 'text-center'],
+               // 'contentOptions' => ['class' => 'text-center'],
                 'attribute' => 'is_status',
-                'enableAjax' => false,
-                'filter' => ['0' => 'Active', '1' => 'Inactive']
+               // 'enableAjax' => true,
+                'value' => 'is_status',
+                'filter' => ArrayHelper::map(common\models\Software::find()->all(), 'software_id', 'software_id')
             ],
             [
                 'class' => 'yii\grid\ActionColumn'

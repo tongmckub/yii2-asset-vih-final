@@ -27,7 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'department_id',
-            'department_name',
+            //'department_name',
+            [
+                'label' => 'แผนก',
+                'attribute' => 'department_name',
+            ],
             [
                 'label' => 'ฝ่าย',
                 'attribute' => 'party_id',

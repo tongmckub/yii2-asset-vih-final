@@ -43,6 +43,9 @@ if (!Yii::$app->user->isGuest) {
                         <a href="<?= \yii\helpers\Url::to(['/party/index']) ?>"><span class="fa fa-edit"></span> เพิ่มฝ่าย</a>
                     </li>
                     <li>
+                        <a href="<?= \yii\helpers\Url::to(['/department/index']) ?>"><span class="fa fa-edit"></span> เพิ่มแผนก</a>
+                    </li>
+                    <li>
                         <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
                     </li>
                     <li>

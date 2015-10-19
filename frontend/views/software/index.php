@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'is_status',
                // 'enableAjax' => true,
                 'value' => 'is_status',
-                'filter' => ArrayHelper::map(common\models\Software::find()->all(), 'software_id', 'software_id')
+               // 'filter' => ArrayHelper::map(common\models\Software::find()->all(), 'software_id', 'software_id')
             ],
             [
                 'class' => 'yii\grid\ActionColumn'

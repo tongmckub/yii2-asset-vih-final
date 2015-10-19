@@ -28,6 +28,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+		    'dateformatter' => [
+            'class' => 'frontend\components\DateFormat',
+        ],	
+        'formatter' => [
+            'dateFormat' => 'dd-MM-yyyy',
+            'datetimeFormat' => 'php:d-m-Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'Rs.',
+            'class' => 'yii\i18n\Formatter',
+        ],
     ],
     'params' => $params,
 ];

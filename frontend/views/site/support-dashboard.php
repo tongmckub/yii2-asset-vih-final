@@ -7,50 +7,50 @@ $this->title = "Support Dashboard";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <script>
-//jQuery.noConflict();
-    $(document).ready(function () {
-        $('.tab-content').slimScroll({
-            height: '300px'
-        });
+$(document).ready(function(){
+    $('.tab-content').slimScroll({
+        height: '300px'
     });
-    $(document).ready(function () {
-        $('#coursList').slimScroll({
-            height: '250px'
-        });
-        $('#holidayList').slimScroll({
-            height: '458px'
-        });
+});
+$(document).ready(function(){
+    $('#coursList').slimScroll({
+        height: '250px'
     });
-//fc-day-grid-container fc-scroller
+});
 </script>
 <style>
-    .tab-content {
-        padding:15px;
-    }
-    .box .box-body .fc-widget-header {
-        background: none;
-    }
-    .edusec-link-box-icon {
-        line-height: 0px !important;
-    }
-    .edusec-link-box-content {
-        font-size:15px !important;
-    }
-    .popover{
-        max-width:450px;   
-    }
+.tab-content {
+   padding:15px;
+}
+.box .box-body .fc-widget-header {
+    background: none;
+}
+.popover{
+    max-width:450px;   
+}
 </style>
 
 <?php
 $this->registerJs(
-        "$(function() {
+"$(function() {
 	$('.noticeModalLink').click(function() {
 		$('#NoticeModal').modal('show')
 		.find('#NoticeModalContent')
 		.load($(this).attr('data-value'));
 	});
-});")
+});");
+
+$this->registerJs(
+"$('body').on('click', function (e) {
+    $('[data-toggle=\"popover\"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide'); 
+        }
+    });
+});"
+)
 ?>
+
 
 <?php
 yii\bootstrap\Modal::begin([
@@ -65,7 +65,7 @@ $isSupport = '';
 $isRole = '';
 if (!Yii::$app->user->isGuest) {
     $isSupport = Yii::$app->session->get('user_id');
-    echo $isRole = Yii::$app->session->get('role_name');
+    $isRole = Yii::$app->session->get('role_name');
 }
 ?>
 
@@ -89,7 +89,7 @@ if (!Yii::$app->user->isGuest) {
                     <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3>&#8377; </h3>
-                            <p>Total paid Fees in active fees category </p>
+                            <p>VIN </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-inr" style="font-size:65px"></i>
@@ -98,7 +98,7 @@ if (!Yii::$app->user->isGuest) {
                     <div class="small-box bg-red">
                         <div class="inner">
                             <h3>&#8377;</h3>
-                            <p>Total unpaid Fees in active fees category </p>
+                            <p>VIS </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-inr" style="font-size:65px"></i>
@@ -163,51 +163,57 @@ EOF;
 			var start_time = moment(event.start).format("DD-MM-YYYY, h:mm:ss a");
 		    	var end_time = moment(event.end).format("DD-MM-YYYY, h:mm:ss a");
 
-		        element.clickover({
+			element.popover({
 		            title: event.title,
 		            placement: 'top',
 		            html: true,
 			    global_close: true,
 			    container: 'body',
+			    trigger: 'hover',
+			    delay: {"show": 500},
 		            content: "<table class='table'><tr><th>Event Detail : </th><td>" + event.description + " </td></tr><tr><th> Event Type : </th><td>" + event.event_type + "</td></tr><tr><th> Start Time : </t><td>" + start_time + "</td></tr><tr><th> End Time : </th><td>" + end_time + "</td></tr></table>"
         		});
                }
 EOF;
                     ?>
+
                     <?=
                     \yii2fullcalendar\yii2fullcalendar::widget([
-                        'options' => ['language' => 'es',],
+                        'options' => ['language' => 'th'],
                         'clientOptions' => [
                             'fixedWeekCount' => false,
                             'weekNumbers' => true,
                             'editable' => true,
+                            'selectable' => true,
                             'eventLimit' => true,
                             'eventLimitText' => 'more Events',
+                            'selectHelper' => true,
                             'header' => [
-                                'left' => 'prev,next today',
+                                'left' => 'today prev,next',
                                 'center' => 'title',
                                 'right' => 'month,agendaWeek,agendaDay'
                             ],
                             'eventClick' => new \yii\web\JsExpression($JSEventClick),
                             'eventRender' => new \yii\web\JsExpression($JsF),
                             'contentHeight' => 380,
-                            'timeFormat' => 'hh(:mm) A',
+                            'timeFormat' => 'hh(:mm) A'
                         ],
-                        'ajaxEvents' => yii\helpers\Url::toRoute(['/dashboard/events/view-events'])
+                        'ajaxEvents' => Url::toRoute(['/events/view-events'])
                     ]);
                     ?>
-                    <div class="row">
-                        <ul class="legend">
-                            <li><span class="holiday"></span> Holiday</li>
-                            <li><span class="importantnotice"></span> Important Notice</li>
-                            <li><span class="meeting"></span> Meeting</li>
-                            <li><span class="messages"></span> Messages</li>
-                        </ul>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                </div>
+                <div class="row">
+                    <ul class="legend">
+                        <li><span class="holiday"></span> วันหยุด</li>
+                        <li><span class="importantnotice"></span> ประกาศสำคัญ</li>
+                        <li><span class="meeting"></span> ประชุม</li>
+                        <li><span class="messages"></span> ข้อความ</li>
+                    </ul>
+                </div>
+            </div><!-- /.box-body -->
+    </div><!-- /.box -->
 
-        </section><!-- /.Left col -->
-    </div>
+</section><!-- /.Left col -->
+</div>
 
 </section>

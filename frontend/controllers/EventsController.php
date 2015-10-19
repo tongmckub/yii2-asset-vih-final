@@ -58,8 +58,7 @@ class EventsController extends Controller {
      */
     public function actionAddEvent() {
         $model = new Events();
-        if ($model->load(Yii::$app->request->post()) || isset($_POST['Events'])) {
-
+        if ($model->load(Yii::$app->request->post()) || isset($_POST['Events'])) { //ถ้า model ว่าง
             $eventList = Events::find()->where([ 'LIKE', 'event_start_date', Yii::$app->dateformatter->getDateFormat($_POST['Events']['event_start_date'])])->andwhere(['is_status' => 0])->count();
 
             if ($eventList > 6) {
@@ -70,7 +69,8 @@ class EventsController extends Controller {
             $model->event_start_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_start_date']);
             $model->event_end_date = Yii::$app->dateformatter->storeDateTimeFormat($_POST['Events']['event_end_date']);
 
-            if ($model->save()) {
+            if ($model->save(false)) {
+                //echo "save";                exit();
                 if (isset($_GET['return_dashboard']))
                     return $this->redirect([ '/events']);
                 else
@@ -87,8 +87,9 @@ class EventsController extends Controller {
     }
 
     public function actionViewEvents($start = NULL, $end = NULL, $_ = NULL) {
-        \Yii::$app->respons->format = \yii\web\Response::FORMAT_JSON;
-
+       
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
         $eventList = Events::find()->where(['is_status' => 0])->all();
 
         $events = [];
@@ -97,19 +98,19 @@ class EventsController extends Controller {
             $Event = new \yii2fullcalendar\models\Event();
             $Event->id = $event->event_id;
             $Event->title = $event->event_title;
-            $Event->description = $event->event_detail;
+            $Event->description = $event->event_detail;          
             $Event->start = $event->event_start_date;
             $Event->end = $event->event_end_date;
             $Event->color = (($event->event_type == 1) ? '#00A65A' : (($event->event_type == 2) ? '#00C0EF' : (($event->event_type == 3) ? '#F39C12' : '#074979') ) );
             $Event->textColor = '#FFF';
             $Event->borderColor = '#000';
             $Event->event_type = (($event->event_type == 1) ? 'Holiday' : (($event->event_type == 2) ? 'Important Notice' : (($event->event_type == 3) ? 'Meeting' : 'Messages')));
-            $Event->allDay = ($event->event_all_day == 1) ? true :
-                    false;
-            // $Event->url = $event->event_url;
+            $Event->allDay = ($event->event_all_day == 1) ? true :false;
+             //$Event->url = $event->event_url;
             $events[] = $Event;
         }
         return $events;
+        var_dump($events);        exit();
     }
 
     public function actionUpdateEvent($event_id) {
@@ -124,7 +125,7 @@ class EventsController extends Controller {
 
             if ($model->save()) {
                 if (isset($_GET['return_dashboard']))
-                    return $this->redirect(['/dashboard']);
+                    return $this->redirect(['/events']);
                 else
                     return $this->redirect(['index']);
             } else {
@@ -144,10 +145,16 @@ class EventsController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
+  public function actionEventDelete($e_id)
+    {
+        $model = Events::findOne($e_id);
+	$model->is_status = 2;
+	$model->save();
 
-        return $this->redirect(['index']);
+        if(isset($_GET['return_dashboard']))
+		return $this->redirect(['/events']);
+	else 
+		return $this->redirect(['index']);
     }
 
     /**

@@ -41,6 +41,7 @@ class Events extends \yii\db\ActiveRecord
     {
         return '{{%events}}';
     }
+ 
 
     /**
      * @inheritdoc
@@ -48,9 +49,9 @@ class Events extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['event_title', 'event_detail', 'event_start_date', 'event_end_date', 'event_type', 'created_at', 'created_by'], 'required'],
+            [['event_title', 'event_detail', 'event_start_date', 'event_end_date', 'event_type', 'created_at', 'created_by'], 'required','message' => ''],
             [['event_start_date', 'event_end_date'], 'safe'],
-            [['event_type', 'event_all_day', 'created_at', 'created_by', 'updated_at', 'updated_by', 'is_status'], 'integer'],
+            [['event_type', 'event_all_day', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['event_title'], 'string', 'max' => 80],
             [['event_detail', 'event_url'], 'string', 'max' => 255]
         ];

@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel frontend\models\EventsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Events');
+$this->title = Yii::t('app', 'ปฏิทิน');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="box box-solid box-warning">
   <div class="box-header">
     <i class="ion ion-calendar"></i>
-    <h3 class="box-title">Event Schedule</h3>
+    <h3 class="box-title">ปฏิทินเวลา</h3>
   </div><!-- /.box-header -->
   <div class="box-body">
    <div class="events-index">
@@ -130,7 +130,7 @@ EOF;
     ?>
 
     <?= \yii2fullcalendar\yii2fullcalendar::widget([
-			'options' => ['language' => 'en'],
+			'options' => ['language' => 'th'],
 			'clientOptions' => [
 				'fixedWeekCount' => false,
 				'weekNumbers'=>true,
@@ -145,7 +145,8 @@ EOF;
 					'right' => 'month,agendaWeek,agendaDay'
 				],
 				'select' =>  new \yii\web\JsExpression($JSEvent),
-				'eventClick' => new \yii\web\JsExpression($JSEventClick),
+				'eventClick' => new \yii\web\JsExpression
+                                        ($JSEventClick),
 				'eventRender' => new \yii\web\JsExpression($JsF),
 				'aspectRatio' => 2,
 				'timeFormat' => 'hh(:mm) A'
@@ -155,10 +156,10 @@ EOF;
    </div>
    <div class="row">
 	<ul class="legend">
-	    <li><span class="holiday"></span> Holiday</li>
-	    <li><span class="importantnotice"></span> Important Notice</li>
-	    <li><span class="meeting"></span> Meeting</li>
-	    <li><span class="messages"></span> Messages</li>
+	    <li><span class="holiday"></span> วันหยุด</li>
+	    <li><span class="importantnotice"></span> ประกาศสำคัญ</li>
+	    <li><span class="meeting"></span> ประชุม</li>
+	    <li><span class="messages"></span> ข้อความ</li>
 	</ul>
    </div>
   </div>

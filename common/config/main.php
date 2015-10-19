@@ -1,4 +1,5 @@
 <?php
+
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'th',
@@ -6,15 +7,27 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-	      'authManager' => [
+        'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-	/* 	'view' => [
-        'theme' => [
-            'pathMap' => [
-                '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/phundament/app'
-            ],
-        ],
-    ], */
+//        'dateformatter' => [
+//            'class' => 'app\components\DateFormat',
+//        ],
+//        'formatter' => [
+//            'dateFormat' => 'dd-MM-yyyy',
+//            'datetimeFormat' => 'php:d-m-Y H:i:s',
+//            'timeFormat' => 'php:H:i:s',
+//            'decimalSeparator' => ',',
+//            'thousandSeparator' => ' ',
+//            'currencyCode' => 'Rs.',
+//            'class' => 'yii\i18n\Formatter',
+//        ],
+    /* 	'view' => [
+      'theme' => [
+      'pathMap' => [
+      '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/phundament/app'
+      ],
+      ],
+      ], */
     ],
 ];

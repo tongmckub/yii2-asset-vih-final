@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel frontend\models\DepartmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Departments');
+$this->title = Yii::t('app', 'จัดการแผนก');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Department'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'เพิ่มแผนก'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?=

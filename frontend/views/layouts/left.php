@@ -61,12 +61,12 @@ if (!Yii::$app->user->isGuest) {
         <ul class="sidebar-menu">
             <li class="treeview">
                 <a href="#">
-                    <i class="glyphicon glyphicon-folder-open"></i> <span>Add Group</span>
+                    <i class="glyphicon glyphicon-folder-open"></i> <span>เพิ่มเครื่องเข้า Group</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="<?= \yii\helpers\Url::to(['/summary-on-site/index']) ?>"><span class="fa fa-edit"></span> เพิ่มเครื่อง -> ซอฟต์แวร์</a>
+                        <a href="<?= \yii\helpers\Url::to(['/summary-on-site/index']) ?>"><span class="fa fa-edit"></span> เพิ่มเครื่องจาก ไอดี</a>
                     </li>
                 </ul>
             </li>
@@ -82,9 +82,7 @@ if (!Yii::$app->user->isGuest) {
                     <li>
                         <a href="<?= \yii\helpers\Url::to(['/report/default/index']) ?>"><span class="fa fa-edit"></span>รายงานข้อมูลการใช้ซอฟต์แวร์</a>
                     </li>
-                    <li>
-                        <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
-                    </li>
+                  
                 </ul>
             </li>
         </ul>

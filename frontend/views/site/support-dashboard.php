@@ -146,7 +146,7 @@ if (!Yii::$app->user->isGuest) {
             <div class="box box-info">
                 <div class="box-header with-border">
                     <i class="fa fa-calendar"></i>
-                    <h3 class="box-title">Calendar</h3>
+                    <h3 class="box-title">ปฏิทิน</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <!--The calendar -->

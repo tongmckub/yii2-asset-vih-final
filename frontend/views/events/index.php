@@ -38,16 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	yii\bootstrap\Modal::end(); 
 ?>
-  
-<section class="content-header">
-<div class="row">
-  <div class="col-xs-12">
-	<h2 class="page-header">	
-		<?= Html::encode($this->title) ?>
-	</h2>
-  </div><!-- /.col -->
-</div>
-</section>
 
 <?php if(\Yii::$app->session->hasFlash('maxEvent')) 
       {

@@ -7,7 +7,7 @@ use dmstr\widgets\Alert;
         Breadcrumbs::widget(
             [
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                'homeLink' => ['label' => '<i class="fa fa-dashboad"></i> Home','encode' => FALSE, 'url' => Yii::$app->homeUrl],
+                'homeLink' => ['label' => '<i class="fa fa-dashboad"></i> หน้าแรก','encode' => FALSE, 'url' => Yii::$app->homeUrl],
             ]
         ) ?>
 

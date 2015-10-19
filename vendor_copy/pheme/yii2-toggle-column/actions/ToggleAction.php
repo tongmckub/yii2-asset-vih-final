@@ -88,9 +88,9 @@ class ToggleAction extends Action
 	/* @Edited By AmitG */
 	if($modelClass == 'common\models\Software')
 		$model = $modelClass::find()->where(['software_id' => $id]);
-//
-//	if($modelClass == 'app\modules\dashboard\models\MsgOfDay')
-//        	$model = $modelClass::find()->where(['msg_of_day_id' => $id]);
+
+        if($modelClass == 'common\models\SummaryOnSite')
+        	$model = $modelClass::find()->where(['summary_id' => $id]);
 //
 //	if($modelClass == 'app\modules\fees\models\FeesCollectCategory')
 //        	$model = $modelClass::find()->where(['fees_collect_category_id' => $id]);

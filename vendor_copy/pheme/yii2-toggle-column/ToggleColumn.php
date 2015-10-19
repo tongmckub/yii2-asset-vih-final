@@ -55,6 +55,8 @@ class ToggleColumn extends DataColumn {
             $url = [$this->action, 'id' => $model->software_id];
         if (get_class($model) == 'common\models\ComputerVih')
             $url = [$this->action, 'id' => $model->computer_id];
+           if (get_class($model) == 'common\models\SummaryOnSite')
+            $url = [$this->action, 'id' => $model->summary_id];
 
         $attribute = $this->attribute;
         $value = $model->$attribute;

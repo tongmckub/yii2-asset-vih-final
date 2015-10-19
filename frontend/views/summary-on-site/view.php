@@ -20,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('กลับ', ['index'], ['class' => 'btn btn-block btn-back']) ?>
         </div>
         <div class="col-xs-6 col-sm-3 left-padding">
-            <?= Html::a('Update', ['update', 'id' => $model->summary_id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('แก้ไข', ['update', 'id' => $model->summary_id], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="col-xs-6 col-sm-1 left-padding">
           <?=
-        Html::a('Delete', ['delete', 'id' => $model->summary_id], [
+        Html::a('ลบ', ['delete', 'id' => $model->summary_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',

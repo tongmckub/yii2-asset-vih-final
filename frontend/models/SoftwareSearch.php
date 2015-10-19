@@ -18,7 +18,7 @@ class SoftwareSearch extends Software
     public function rules()
     {
         return [
-            [['software_id', 'created_by', 'created_at', 'updated_at', 'updated_by'], 'integer'],
+            [['software_id', 'created_by', 'created_at', 'updated_at', 'updated_by','is_status'], 'integer'],
             [['software_name', 'software_detail'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class SoftwareSearch extends Software
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'is_status' => $this->is_status,
         ]);
 
         $query->andFilterWhere(['like', 'software_name', $this->software_name])

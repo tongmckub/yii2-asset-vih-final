@@ -68,9 +68,6 @@ if (!Yii::$app->user->isGuest) {
                     <li>
                         <a href="<?= \yii\helpers\Url::to(['/summary-on-site/index']) ?>"><span class="fa fa-edit"></span> เพิ่มเครื่อง -> ซอฟต์แวร์</a>
                     </li>
-                    <li>
-                        <a href="<?= \yii\helpers\Url::to(['/software/index']) ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> เพิ่มซอฟแวร์</a>
-                    </li>
                 </ul>
             </li>
         </ul>

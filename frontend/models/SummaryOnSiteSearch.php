@@ -18,7 +18,7 @@ class SummaryOnSiteSearch extends SummaryOnSite
     public function rules()
     {
         return [
-            [['summary_id', 'software_id', 'computer_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+            [['summary_id', 'software_id', 'computer_id', 'created_by', 'updated_by', 'created_at', 'updated_at','is_status'], 'integer'],
         ];
     }
 
@@ -40,10 +40,11 @@ class SummaryOnSiteSearch extends SummaryOnSite
      */
     public function search($params)
     {
-        $query = SummaryOnSite::find();
+        $query = SummaryOnSite::find()->where('is_status != 2');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['attributes' => ['software_id']]
         ]);
 
         $this->load($params);
@@ -62,6 +63,7 @@ class SummaryOnSiteSearch extends SummaryOnSite
             'updated_by' => $this->updated_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'is_status' => $this->is_status,
         ]);
 
         return $dataProvider;

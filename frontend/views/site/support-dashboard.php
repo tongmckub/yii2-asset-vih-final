@@ -128,7 +128,7 @@ if (!Yii::$app->user->isGuest) {
                                     <i class="fa fa-ellipsis-v"></i>
                                 </span>
                                 <span class="text"><?php echo $sl->software_name; ?></span>
-                                <?php $comCount = common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id])->count(); ?>
+                                <?php $comCount = common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id,'is_status'=>0])->count(); ?>
                                 <span class="notification-container pull-right text-teal" title="<?= $comCount; ?> Computers"><i class="fa fa-users"></i><span class="label  notification-counter">  <?= Html::a($comCount, ['software/view', 'id' => $sl->software_id]) ?>  </span></span>
                             </li>
                         <?php endforeach; ?>

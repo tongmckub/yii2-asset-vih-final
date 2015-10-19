@@ -8,6 +8,7 @@ use frontend\models\SoftwareSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use pheme\grid\actions\ToggleAction;
 
 /**

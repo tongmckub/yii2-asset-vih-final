@@ -13,6 +13,9 @@ AppAsset::register($this);
 <header class="header">
 
 <?= Html::a(Yii::$app->name, Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    
+<?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/edusec.png', ['width'=>'120px;', 'height'=>'22px']), Yii::$app->homeUrl, ['class' => 'logo']) ?>
+
 
 <nav class="navbar navbar-static-top" role="navigation">
 

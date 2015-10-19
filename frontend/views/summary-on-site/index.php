@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\SummaryOnSiteSearch */
@@ -10,6 +12,7 @@ $this->title = 'จัดการคอมพิวเตอร์';
 $this->params['breadcrumbs'][] = $this->title;
 echo $isRole = Yii::$app->session->get('role_name');
 ?>
+
 <?php
 if (Yii::$app->session->hasFlash('green-0') || Yii::$app->session->hasFlash('red-0')) :
     ?>
@@ -30,7 +33,7 @@ endif;
 <div class="summary-on-site-index">
     <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-graduation-cap"></i> จัดการคอมพิวเตอร์ by Site </h3>
+            <h3 class="box-title"><i class="glyphicon glyphicon-list-alt"></i> จัดการคอมพิวเตอร์ by Site </h3>
         </div>
         <div class="box-body">
             <div class="row">
@@ -74,7 +77,7 @@ endif;
     <div class="box box-default">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <i class="ion ion-university"></i>
+                <i class="glyphicon glyphicon-list-alt"></i>
                 <h3 class="box-title">จำนวนซอฟต์แวร์</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
@@ -92,7 +95,7 @@ endif;
                                 <?php echo $sl->software_name; ?>
                             </span>
                             <!--ปุ่ม count com-->
-                            <?php $comCount = \common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id])->count(); ?>
+                            <?php $comCount = \common\models\SummaryOnSite::find()->where(['software_id' => $sl->software_id , 'is_status' => 0])->count(); ?>
                             <div class="pull-right box-tools">
                                 <span class="btn btn-sm btn-warning disp-count">
                                     <i class="fa fa-sitemap"></i> Computer &nbsp;
@@ -108,30 +111,68 @@ endif;
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>   
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'summary_id',
-            [
-                'attribute' => 'softwarw_id',
-                'format' => 'text',
-                'label' => 'ชื่อซอฟต์แวร์',
-                'value' => 'software.software_name',
-            ],
-            'computer_id',
-            'created_by',
-            //'updated_by',
-            //'created_at',
-            //'updated_at',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+    <?php
+    Pjax::begin([
+        'id' => 'summary_id',
+        'enablePushState' => false,
+        'enableReplaceState' => false,
     ]);
     ?>
-
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="box">
+        <div class="box-header with-border">
+            <i class="glyphicon glyphicon-th-list"></i>
+            <h3 class="box-title">จำนวนเครื่องที่ใช้ซอฟต์แวร์ทั้งหมด</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body table-responsive">
+            <div class="batches-index">
+                <?=
+                GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        //'summary_id',
+                        [
+                            'attribute' => 'software_id',
+                            'format' => 'text',
+                            'label' => 'ชื่อซอฟต์แวร์',
+                            'value' => 'software.software_name',
+                            //'sort' => false
+                            //'filter' => $dataProvider->software_id
+                            'filter' => ArrayHelper::map(\common\models\Software::find()->all(), 'software_id', 'software_name')
+                        ],
+                        [
+                            'attribute' => 'computer_id',
+                            'format' => 'text',
+                            'label' => 'ชื่อผู้ใช้',
+                            'value' => 'computer.of_user',
+                            'filter' => ArrayHelper::map(\common\models\ComputerVih::find()->all(), 'computer_id', 'of_user')
+                        ],
+                        [
+                            'attribute' => 'created_by',
+                            'format' => 'text',
+                            'label' => 'สร้างโดย',
+                            'value' => 'createdBy.username',
+                        ],
+                        [
+                            'class' => '\pheme\grid\ToggleColumn',
+                            'contentOptions' => ['class' => 'text-center'],
+                            'attribute' => 'is_status',
+                            'enableAjax' => false,
+                            'value' => 'is_status',
+                            'filter' => ['1' => 'InActive', '0' => 'Active']
+                        // 'filter' => ArrayHelper::map(common\models\Software::find()->all(), 'software_id', 'software_id')
+                        ],
+                        //'updated_by',
+                        //'created_at',
+                        //'updated_at',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]);
+                ?>
+                <?php Pjax::end(); ?>
+            </div>
+        </div>
+    </div>
 </div>

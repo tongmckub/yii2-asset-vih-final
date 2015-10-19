@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
+use pheme\grid\actions\ToggleAction;
 
 /**
  * SummaryOnSiteController implements the CRUD actions for SummaryOnSite model.
@@ -25,6 +26,18 @@ class SummaryOnSiteController extends Controller {
                 'actions' => [
                     'delete' => ['post'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions() {
+        return [
+            'toggle' => [
+                'class' => ToggleAction::className(),
+                'modelClass' => 'common\models\SummaryOnSite',
+                'attribute' => 'is_status',
+                // Uncomment to enable flash messages
+                'setFlash' => true,
             ],
         ];
     }
@@ -73,8 +86,8 @@ class SummaryOnSiteController extends Controller {
             $computer_vihSum = ComputerVih::find()->where(['computer_id' => $as_summary['computer_id']]);
             $dataTmp[] = $computer_vihSum;
             $comTmp[] = $as_summary['computer_id'];
-            
-            $computer_vih = ComputerVih::find()->where(['NOT IN','computer_id', $comTmp])->asArray()->limit(300)->orderBy('computer_id DESC');
+
+            $computer_vih = ComputerVih::find()->where(['NOT IN', 'computer_id', $comTmp])->asArray()->limit(300)->orderBy('computer_id DESC');
         }
         if ($model->load(Yii::$app->request->post()) && isset($_POST['SummaryOnSite'])) {
             $att_computer = Json::decode($model->computer_id);
@@ -85,8 +98,8 @@ class SummaryOnSiteController extends Controller {
                 $model->isNewRecord = true;
                 $model->software_id = $get_software_id;
                 $model->computer_id = $att_computer[$i];
-                if ($model->save(false)) {                 
-                   // exit();
+                if ($model->save(false)) {
+                    // exit();
                     Yii::$app->session->setFlash('green-' . $i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' for <b>Batch: </b>' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');
                 } else {
                     Yii::$app->session->setFlash('red-' . $i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> ' . $_POST['SummaryOnSite']['computer_id'] . ' has already been taken.' . ComputerVih::findOne($att_computer[$i])->computer_id . ' is created successfully');

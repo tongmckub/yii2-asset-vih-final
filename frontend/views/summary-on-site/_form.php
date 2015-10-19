@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\ComputerVih;
 use common\models\Software;
+use yii\helpers\VarDumper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SummaryOnSite */
@@ -24,7 +25,7 @@ $get_software_id = Yii::$app->getRequest()->get('s_id');
                 <?php $form = ActiveForm::begin(); ?>
                 <div class="form-group">
                     <?php
-                    print_r($computerReg);
+                    print_r($computerReg); 
                     echo maksyutin\duallistbox\Widget::widget([
                         'model' => $model,
                         'attribute' => 'computer_id',
